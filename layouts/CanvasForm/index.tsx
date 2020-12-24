@@ -139,8 +139,16 @@ const CanvasLayout = () => {
                             >
                                 <MenuItem value={"วลี"}>วลี</MenuItem>
                                 <MenuItem value={"น."}>นาม</MenuItem>
-                                <MenuItem value={"กริยา"}>กริยา</MenuItem>
-                                <MenuItem value={"กรรม"}>กรรม</MenuItem>
+                                <MenuItem value={"ก."}>กริยา</MenuItem>
+                                <MenuItem value={"ว."}>วิเศษณ์</MenuItem>
+                                <MenuItem value={"สรรพนาม"}>สรรพนาม</MenuItem>
+                                <MenuItem value={"สกรรมกริยา"}>สกรรมกริยา</MenuItem>
+                                <MenuItem value={"อกรรมกริยา"}>อกรรมกริยา</MenuItem>
+                                <MenuItem value={"คุณศัพท์"}>คุณศัพท์</MenuItem>
+                                <MenuItem value={"นิบาต"}>นิบาต</MenuItem>
+                                <MenuItem value={"สันธาน"}>สันธาน</MenuItem>
+                                <MenuItem value={"บุพบท"}>บุพบท</MenuItem>
+                                <MenuItem value={"อุทาน"}>อุทาน</MenuItem>
                             </Select>
                         </Grid>
                         <Grid item xs={12}>

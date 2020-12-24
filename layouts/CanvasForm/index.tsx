@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Canvas from '../../components/Canvas';
-import { TextField, Card, CardContent, Select, MenuItem, Grid, Button, Divider, Snackbar } from '@material-ui/core';
+import { TextField, Card, CardContent, Select, MenuItem, Grid, Divider, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
+import { DownloadOutlined } from '@ant-design/icons';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { Checkbox  } from 'antd';
+import { Checkbox, Button } from 'antd';
 import useModal from '../../hooks/useModal';
 
 const CanvasLayout = () => {
+    const canvas = useRef<HTMLCanvasElement>(null)
+
     const formik = useFormik({
         initialValues: {
             word: '',
@@ -38,7 +41,11 @@ const CanvasLayout = () => {
                 })
             })
         }),
-        onSubmit: values => {
+        onSubmit: () => {
+            let link = document.getElementById('link');
+            link.setAttribute('download', 'meaning.png');
+            link.setAttribute('href', canvas.current.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+            link.click();
             openAlert();
             formik.resetForm();
         }
@@ -67,7 +74,7 @@ const CanvasLayout = () => {
                     onClose={() => closeAlert()}
                     severity="success"
                 >
-                    ภาพได้ถูกส่งไปเรียบร้อยแล้ว
+                    ภาพได้สร้างเสร็จเรียบร้อยแล้ว
                 </MuiAlert>
             </Snackbar>
 
@@ -84,6 +91,7 @@ const CanvasLayout = () => {
                     :
                         undefined
                 }
+                canvas={canvas}
             />
 
             <Card style={{minWidth: "360px", maxWidth: "750px"}} >
@@ -213,17 +221,10 @@ const CanvasLayout = () => {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                component="span"
-                                style={{
-                                    float: "right"
-                                }}
-                                onClick={() => formik.handleSubmit()}
-                            >
-                                ส่ง
+                            <Button id="btn-float-left" type="primary" icon={<DownloadOutlined />} size='large'>
+                                Download
                             </Button>
+                            <a id="link" style={{display:"hidden"}}></a>
                         </Grid>
                     </Grid>
                 </CardContent>

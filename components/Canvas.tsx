@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useEffect, MutableRefObject } from 'react';
 
 interface Props {
     size?: number
@@ -8,6 +8,7 @@ interface Props {
     theme?: 'light' | 'dark'
     font: string
     author?: string
+    canvas: MutableRefObject<HTMLCanvasElement>
 }
 
 interface TextElement {
@@ -33,9 +34,7 @@ interface RGBColor {
 
 type CanvasInfo = (canvasElement: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void
 
-const Canvas = ({ size=800, word, type, meaning, theme='light', font, author }: Props) => {
-    const canvas = useRef<HTMLCanvasElement>(null);
-
+const Canvas = ({ size=800, word, type, meaning, theme='light', font, author, canvas }: Props) => {
     useEffect(() => {
         const canvasElement = canvas.current;
 

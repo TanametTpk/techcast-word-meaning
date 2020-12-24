@@ -1,6 +1,9 @@
 import Head from 'next/head';
 import CenterContentLayout from '../layouts/CenterContent';
 import CanvasForm from '../layouts/CanvasForm';
+import ReactGA from 'react-ga';
+
+ReactGA.pageview('/');
 
 export default function Home() {
   return (

@@ -7,6 +7,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Checkbox, Button } from 'antd';
 import useModal from '../../hooks/useModal';
+import ReactGA from 'react-ga';
 
 const CanvasLayout = () => {
     const canvas = useRef<HTMLCanvasElement>(null)
@@ -42,6 +43,11 @@ const CanvasLayout = () => {
             })
         }),
         onSubmit: () => {
+            ReactGA.event({
+                category: 'User',
+                action: 'Created Content'
+            });
+
             let link = document.getElementById('link');
             link.setAttribute('download', 'meaning.png');
             link.setAttribute('href', canvas.current.toDataURL("image/png").replace("image/png", "image/octet-stream"));

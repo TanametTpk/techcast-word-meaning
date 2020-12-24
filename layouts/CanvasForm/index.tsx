@@ -221,7 +221,13 @@ const CanvasLayout = () => {
                         </Grid>
 
                         <Grid item xs={12}>
-                            <Button id="btn-float-left" type="primary" icon={<DownloadOutlined />} size='large'>
+                            <Button
+                                id="btn-float-left"
+                                type="primary"
+                                icon={<DownloadOutlined />}
+                                size='large'
+                                onClick={() => formik.handleSubmit()}
+                            >
                                 Download
                             </Button>
                             <a id="link" style={{display:"hidden"}}></a>

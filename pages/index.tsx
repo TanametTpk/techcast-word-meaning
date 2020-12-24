@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import CenterContentLayout from '../layouts/CenterContent';
+import CanvasForm from '../layouts/CanvasForm';
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
       </Head>
 
       <CenterContentLayout>
-        Hello world
+        <CanvasForm />
       </CenterContentLayout>
     </div>
   )

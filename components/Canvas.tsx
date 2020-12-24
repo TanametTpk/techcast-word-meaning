@@ -65,7 +65,7 @@ const Canvas = ({ size=800, word, type, meaning, theme='light', font, author, ca
             writeWord({
                 text: word ? word : "Word",
                 x: height * 0.09,
-                y: height / 2
+                y: height / 2 - (word.includes("ู") ? height * 0.02 : 0)
             }, {
                 fontSize: height * wordSizeRatio,
                 textAlign: 'left',
@@ -147,7 +147,7 @@ const Canvas = ({ size=800, word, type, meaning, theme='light', font, author, ca
         const ctx = canvasElement.getContext("2d");
         if (!ctx) return
 
-        var lineheight = 15 + fontSize;
+        var lineheight = 18 + fontSize;
         var lines = text.split('\n');
 
         for (var i = 0; i<lines.length; i++){

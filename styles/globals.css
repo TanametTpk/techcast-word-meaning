@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300;400&display=swap');
+@import '~antd/dist/antd.dark.css';
 
 html,
 body {
@@ -35,4 +36,16 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+h1, span {
+  color:#263238;
+}
+
+.ant-btn > span {
+  color: white;
+}
+
+#btn-float-left {
+  float: right;
 }

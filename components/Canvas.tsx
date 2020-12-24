@@ -35,6 +35,7 @@ interface RGBColor {
 type CanvasInfo = (canvasElement: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void
 
 const Canvas = ({ size=800, word, type, meaning, theme='light', font, author, canvas }: Props) => {
+
     useEffect(() => {
         const canvasElement = canvas.current;
 

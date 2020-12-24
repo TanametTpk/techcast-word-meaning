@@ -7,10 +7,14 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Checkbox, Button } from 'antd';
 import useModal from '../../hooks/useModal';
+import useWindowSize, { WindowSize } from '../../hooks/useWindowSize';
+import {isMobile} from 'react-device-detect';
 import ReactGA from 'react-ga';
 
 const CanvasLayout = () => {
     const canvas = useRef<HTMLCanvasElement>(null)
+    const windowSize: WindowSize = useWindowSize()
+    // const screenType = useScreenType()
 
     const formik = useFormik({
         initialValues: {
@@ -48,16 +52,40 @@ const CanvasLayout = () => {
                 action: 'Created Content'
             });
 
-            let link = document.getElementById('link');
-            link.setAttribute('download', 'meaning.png');
-            link.setAttribute('href', canvas.current.toDataURL("image/png").replace("image/png", "image/octet-stream"));
-            link.click();
+            if (isMobile) {
+                writeImage(canvas.current.toDataURL("image/png"))
+            }else {
+                let link = document.getElementById('link');
+                link.setAttribute('download', 'meaning.png');
+                link.setAttribute('href', canvas.current.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+                link.click();
+            }
+            
             openAlert();
             formik.resetForm();
         }
     });
 
     const [isSuccessAlertOpen , openAlert, closeAlert] = useModal(false)
+
+    const replaceRepeatingWithSigle = (char: string, text: string): string => {
+        const reg = new RegExp(`${char}+`, 'g')       
+        return text.replace(reg, char)
+    }
+
+    const thaiTextWarping = (text: string): string => {
+        let result: string = text
+        const allChars = "อัอิอ็อิอ่อ้อ๊อ๋อุอูอิอีอือึ".split("อ").slice(1)
+        for (let i = 0; i < allChars.length; i++) {
+            const char: string = allChars[i]
+            result = replaceRepeatingWithSigle(char, result)
+        }
+        return result
+    }
+
+    const writeImage = (image: string) => {
+        document.write('<img src="'+ image +'"/>');
+    }
 
     return (
         <div
@@ -85,22 +113,22 @@ const CanvasLayout = () => {
             </Snackbar>
 
             <Canvas
-                size={500}
-                word={formik.values.word}
+                size={windowSize.height > windowSize.width ? windowSize.width : 500}
+                word={thaiTextWarping(formik.values.word)}
                 type={formik.values.type}
-                meaning={formik.values.meaning}
+                meaning={thaiTextWarping(formik.values.meaning)}
                 theme={formik.values.isDarkTheme ? 'dark' : 'light'}
                 font="Mitr"
                 author={
                     formik.values.isWantCredit ?
-                        formik.values.ref?.name
+                        thaiTextWarping(formik.values.ref?.name)
                     :
                         undefined
                 }
                 canvas={canvas}
             />
 
-            <Card style={{minWidth: "360px", maxWidth: "750px"}} >
+            <Card style={{minWidth: "120px", maxWidth: "750px"}} >
                 <CardContent>
                     <h1
                         style={{
@@ -120,7 +148,7 @@ const CanvasLayout = () => {
                                 multiline
                                 rowsMax={4}
                                 name="word"
-                                value={formik.values.word}
+                                value={thaiTextWarping(formik.values.word)}
                                 onChange={formik.handleChange}
                                 variant="outlined"
                                 style={{width:"100%"}}
@@ -158,7 +186,7 @@ const CanvasLayout = () => {
                                 rows={3}
                                 rowsMax={4}
                                 name="meaning"
-                                value={formik.values.meaning}
+                                value={thaiTextWarping(formik.values.meaning)}
                                 onChange={formik.handleChange}
                                 variant="outlined"
                                 style={{width:"100%"}}
@@ -212,7 +240,7 @@ const CanvasLayout = () => {
                                         rowsMax={4}
                                         name="ref.name"
                                         disabled={!formik.values.isWantCredit}
-                                        value={formik.values.ref.name}
+                                        value={thaiTextWarping(formik.values.ref.name)}
                                         onChange={formik.handleChange}
                                         variant="outlined"
                                         style={{

@@ -166,9 +166,9 @@ const CanvasLayout = () => {
                                 style={{width:"100%"}}
                             >
                                 <MenuItem value={"วลี"}>วลี</MenuItem>
-                                <MenuItem value={"น."}>นาม</MenuItem>
-                                <MenuItem value={"ก."}>กริยา</MenuItem>
-                                <MenuItem value={"ว."}>วิเศษณ์</MenuItem>
+                                <MenuItem value={"นาม"}>นาม</MenuItem>
+                                <MenuItem value={"กริยา"}>กริยา</MenuItem>
+                                <MenuItem value={"วิเศษณ์"}>วิเศษณ์</MenuItem>
                                 <MenuItem value={"สรรพนาม"}>สรรพนาม</MenuItem>
                                 <MenuItem value={"สกรรมกริยา"}>สกรรมกริยา</MenuItem>
                                 <MenuItem value={"อกรรมกริยา"}>อกรรมกริยา</MenuItem>

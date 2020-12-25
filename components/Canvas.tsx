@@ -100,6 +100,19 @@ const Canvas = ({ size=800, word, type, meaning, theme='light', font, author, ca
                 fontFamily: font
             }, typeLength);
 
+            writeText({
+                text: "ฝากติดตาม Techcast ใน youtube ด้วยนะ",
+                x: height * 0.07,
+                y: height * 0.965
+            }, {
+                fontSize: height * 0.02
+                ,
+                textAlign: 'left',
+                textBaseline: 'bottom',
+                color,
+                fontFamily: font
+            }, 0);
+
             if (author) {
                 writeText({
                     text: `by ${author}`,

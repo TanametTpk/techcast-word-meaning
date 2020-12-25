@@ -102,7 +102,7 @@ const Canvas = ({ size=800, word, type, meaning, theme='light', font, author, ca
 
             writeText({
                 text: "ฝากติดตาม Techcast ใน youtube ด้วยนะ",
-                x: height * 0.07,
+                x: height * 0.03,
                 y: height * 0.965
             }, {
                 fontSize: height * 0.02
